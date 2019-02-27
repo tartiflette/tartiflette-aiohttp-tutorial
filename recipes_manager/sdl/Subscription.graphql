@@ -1,0 +1,13 @@
+type Subscription {
+  launchAndWaitCookingTimer: CookingTimer
+}
+
+enum CookingStatus {
+  COOKING,
+  COOKED
+}
+
+type CookingTimer {
+  remainingTime: Int!,
+  status: CookingStatus!
+}

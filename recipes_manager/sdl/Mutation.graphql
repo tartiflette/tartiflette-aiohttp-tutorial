@@ -1,0 +1,9 @@
+type Mutation {
+  updateRecipe(input: RecipeInput!): Recipe
+}
+
+input RecipeInput {
+  id: Int!
+  name: String
+  cookingTime: Int
+}
