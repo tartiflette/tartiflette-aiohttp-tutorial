@@ -1,5 +1,13 @@
+directive @rateLimiting(
+  name: String
+  max_attempts: Int = 5
+  duration: Int = 60
+) on FIELD_DEFINITION
+
+directive @nonIntrospectable on FIELD_DEFINITION
+
 type Mutation {
-  updateRecipe(input: RecipeInput!): Recipe
+  updateRecipe(input: RecipeInput!): Recipe @rateLimiting(name: "update_recipe") @nonIntrospectable
 }
 
 input RecipeInput {

@@ -1,5 +1,5 @@
 type Subscription {
-  launchAndWaitCookingTimer: CookingTimer
+  launchAndWaitCookingTimer(id: Int!): CookingTimer
 }
 
 enum CookingStatus {

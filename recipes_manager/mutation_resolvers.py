@@ -7,8 +7,6 @@ from recipes_manager.data import INGREDIENTS_QUANTITY, RECIPES
 
 @Resolver("Mutation.updateRecipe")
 async def resolver_recipe(parent, args, ctx, info):
-    print(args["input"])
-    
     recipe_input = {
         "id": 1,
         "name": "The best Tartiflette by Eric Guelpa",

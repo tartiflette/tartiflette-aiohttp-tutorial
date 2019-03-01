@@ -4,15 +4,18 @@ from aiohttp import web
 from tartiflette import Engine
 from tartiflette_aiohttp import register_graphql_handlers
 
-import recipes_manager.query_resolvers
-import recipes_manager.mutation_resolvers
-import recipes_manager.subscription_resolvers
-
 
 # Tartiflette Engine, the only one :)
 # Will load the SDL files from the ./sdl folder
 engine = Engine(
-    os.path.dirname(os.path.abspath(__file__)) + "/sdl"
+    os.path.dirname(os.path.abspath(__file__)) + "/sdl",
+    modules=[
+        "recipes_manager.query_resolvers",
+        "recipes_manager.mutation_resolvers",
+        "recipes_manager.subscription_resolvers",
+        "recipes_manager.directives.rate_limiting",
+        "recipes_manager.directives.non_introspectable",
+    ]
 )
 
 

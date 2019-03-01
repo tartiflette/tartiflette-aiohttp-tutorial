@@ -1,32 +1,62 @@
 from typing import Any, Callable, Dict, Optional
 
+import time
+
 from tartiflette.directive import Directive
 from tartiflette.directive import CommonDirective
+
+_RATE_LIMIT_RULES = {}
+
+
+def rate_limit_new_rule(name, max_attempts, duration):
+    _RATE_LIMIT_RULES[name] = {
+        "max_attempts": max_attempts,
+        "duration": duration,
+        "start_time": int(time.time()),
+        "nb_attempts": 1
+    }
+
+
+def rate_limit_check_and_bump(name, max_attempts, duration):
+    rule = _RATE_LIMIT_RULES[name]
+
+    if int(time.time()) > (rule["start_time"] + rule["duration"]):
+        rate_limit_new_rule(name, max_attempts, duration)
+        return True
+    
+    _RATE_LIMIT_RULES[name]["nb_attempts"] = rule["nb_attempts"] + 1
+
+    if rule["nb_attempts"] >= rule["max_attempts"]:
+        rate_limit_new_rule(name, max_attempts, duration)
+        return False
+    
+    return True
 
 
 @Directive("rateLimiting")
 class RateLimiting(CommonDirective):
     @staticmethod
-    async def on_execution(
-        _directive_args: Dict[str, Any],
+    async def on_field_execution(
+        directive_args: Dict[str, Any],
         next_resolver: Callable,
         parent_result: Optional[Any],
         args: Dict[str, Any],
         ctx: Optional[Dict[str, Any]],
         info: "Info",
     ) -> Any:
-        _key = f"ratelimiting_{_directive_args.get('name')}"
-        _max_attemps = _directive_args.get("max_attempts")
-        _duration = _directive_args.get("duration")
-        cached_value = await ctx["app"]["redis"].get(_key)
-
-        if cached_value:
-            cached_value = int(cached_value)
-            if cached_value <= 0:
-                print(f"@rateLimiting({_key}: {_duration}s): rate limited")
+        if not (directive_args.get('name') in _RATE_LIMIT_RULES):
+            rate_limit_new_rule(
+                directive_args.get('name'),
+                directive_args.get("max_attempts"),
+                directive_args.get("duration")
+            )
+        else:
+            is_valid = rate_limit_check_and_bump(
+                directive_args.get('name'),
+                directive_args.get("max_attempts"),
+                directive_args.get("duration")
+            )
+            if not is_valid:
                 raise Exception("You reached the limit of the rate limiting")
-            _max_attemps = cached_value - 1
 
-        await ctx["app"]["redis"].setex(_key, _duration, str(_max_attemps))
-        print(f"@rateLimiting({_key}: {_duration}s): {_max_attemps}")
         return await next_resolver(parent_result, args, ctx, info)
