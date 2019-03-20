@@ -5,7 +5,7 @@ from tartiflette import Subscription
 from recipes_manager.data import RECIPES
 
 @Subscription("Subscription.launchAndWaitCookingTimer")
-async def subscription_cooking_time(
+async def on_cooking_time(
     parent_result, args, ctx, info
 ):
   recipe = [r for r in RECIPES if r["id"] == int(args["id"])]
