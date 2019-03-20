@@ -159,16 +159,16 @@
         },
         "tartiflette": {
             "hashes": [
-                "sha256:1229d7af5111fd99f78802393103e4e5ef9566f2d3b71be50711254b2a7b02ab"
+                "sha256:bb374568a5b8c2813c54119ca5ae95d8dd3fa15f7b3ec245a8b5d673f97def75"
             ],
-            "version": "==0.6.3"
+            "version": "==0.6.7"
         },
         "tartiflette-aiohttp": {
             "hashes": [
-                "sha256:778c049b8e735d03f63ce006d342dc7533864d409d52aa51f4d129e13d760197"
+                "sha256:091b11d05d896ea6b1c685c95ddd6dd97d7f92cbadf772cee70bb1578cec6a90"
             ],
             "index": "pypi",
-            "version": "==0.4.1"
+            "version": "==0.4.2"
         },
         "yarl": {
             "hashes": [
