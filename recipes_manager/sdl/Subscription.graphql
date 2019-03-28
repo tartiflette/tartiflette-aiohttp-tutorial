@@ -3,11 +3,11 @@ type Subscription {
 }
 
 enum CookingStatus {
-  COOKING,
+  COOKING
   COOKED
 }
 
 type CookingTimer {
-  remainingTime: Int!,
+  remainingTime: Int!
   status: CookingStatus!
 }

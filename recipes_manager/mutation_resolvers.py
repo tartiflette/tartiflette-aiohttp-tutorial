@@ -2,24 +2,21 @@ import collections
 
 from tartiflette import Resolver
 
-from recipes_manager.data import INGREDIENTS_QUANTITY, RECIPES
+from recipes_manager.data import INGREDIENTS, RECIPES
 
 
 @Resolver("Mutation.updateRecipe")
-async def resolver_recipe(parent, args, ctx, info):
-    recipe_input = {
-        "id": 1,
-        "name": "The best Tartiflette by Eric Guelpa",
-        "cookingTime": 12
-    }
+async def update_recipe(parent, args, ctx, info):
+    if not args.get("input"):
+        raise Exception("'input' parameter is mandatory")
     
     for index, recipe in enumerate(RECIPES):
-        if recipe["id"] == recipe_input["id"]:
-            if "name" in recipe_input:
-                RECIPES[index]["name"] = recipe_input["name"]
+        if recipe["id"] == args["input"].get("id"):
+            if "name" in args["input"]:
+                RECIPES[index]["name"] = args["input"]["name"]
 
-            if "cookingTime" in recipe_input:
-                RECIPES[index]["cookingTime"] = recipe_input["cookingTime"]
+            if "cookingTime" in args["input"]:
+                RECIPES[index]["cookingTime"] = args["input"]["cookingTime"]
 
             return RECIPES[index]
 

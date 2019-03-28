@@ -4,20 +4,20 @@ type Query {
 }
 
 enum IngredientType {
-    GRAM
-    LITER
-    UNIT
+  GRAM
+  LITER
+  UNIT
 }
 
-type IngredientQuantity {
-    name: String!
-    quantity: Float!
-    type: IngredientType!
+type Ingredient {
+  name: String!
+  quantity: Float!
+  type: IngredientType!
 }
 
 type Recipe {
   id: Int
   name: String
-  ingredientsQuantity: [IngredientQuantity]
+  ingredients: [Ingredient]
   cookingTime: Int
 }
