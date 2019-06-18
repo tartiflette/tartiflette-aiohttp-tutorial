@@ -9,7 +9,7 @@ from recipes_manager.data import INGREDIENTS, RECIPES
 async def update_recipe(parent, args, ctx, info):
     if not args.get("input"):
         raise Exception("'input' parameter is mandatory")
-    
+
     for index, recipe in enumerate(RECIPES):
         if recipe["id"] == args["input"].get("id"):
             if "name" in args["input"]:
