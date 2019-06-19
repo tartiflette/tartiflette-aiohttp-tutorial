@@ -1,17 +1,17 @@
 directive @rateLimiting(
-  name: String
-  max_attempts: Int = 5
-  duration: Int = 60
+    name: String
+    max_attempts: Int = 5
+    duration: Int = 60
 ) on FIELD_DEFINITION
 
-directive @nonIntrospectable on FIELD_DEFINITION
+directive @auth(role: String!) on FIELD_DEFINITION
 
 type Mutation {
-  updateRecipe(input: RecipeInput!): Recipe @rateLimiting(name: "update_recipe") @nonIntrospectable
+    updateRecipe(input: RecipeInput!): Recipe @auth(role: "admin") @rateLimiting(name: "update_recipe")
 }
 
 input RecipeInput {
-  id: Int!
-  name: String
-  cookingTime: Int
+    id: Int!
+    name: String
+    cookingTime: Int
 }
