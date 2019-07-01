@@ -99,6 +99,7 @@
         },
         "idna": {
             "hashes": [
+                "sha256:c357b3f628cf53ae2c4c05627ecc484553142ca23264e593d327bcde5e9c3407",
                 "sha256:ea8b7f6188e6fa117537c3df7da9fc686d485087abf6ac197f9c46432f7e4a3c"
             ],
             "version": "==2.8"
@@ -145,7 +146,7 @@
         },
         "pycparser": {
             "hashes": [
-                "sha256:6d70267e0c277b0bf01379af02ed38fa21551045e7f3b333dfcd3beb52c20371"
+                "sha256:a988718abfad80b6b157acce7bf130a30876d27603738ac39f140993246b25b3"
             ],
             "version": "==2.19"
         },
@@ -158,16 +159,16 @@
         },
         "tartiflette": {
             "hashes": [
-                "sha256:1a3cf2011f4fa49d01314e8849f1834d4c6375363ece9a6188a172c00f73de8e"
+                "sha256:642aa619abc920c62400258713c72434a0dab87e64dbfed7bed6635ff6cf8bfa"
             ],
-            "version": "==0.11.0"
+            "version": "==0.11.2"
         },
         "tartiflette-aiohttp": {
             "hashes": [
-                "sha256:973ca410389171c4f22d8d3796ef892cefd8529769e0c002469eacd78ac1af2d"
+                "sha256:0c86e32e63997e9e73de65d52ee2292355d57992c0eb92e09e1d291f8fd94e21"
             ],
             "index": "pypi",
-            "version": "==0.8.0"
+            "version": "==0.8.1"
         },
         "yarl": {
             "hashes": [
