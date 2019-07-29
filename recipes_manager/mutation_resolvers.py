@@ -1,23 +1,26 @@
-import collections
-
 from tartiflette import Resolver
 
-from recipes_manager.data import INGREDIENTS, RECIPES
+from recipes_manager.data import RECIPES
 
 
 @Resolver("Mutation.updateRecipe")
-async def update_recipe(parent, args, ctx, info):
-    if not args.get("input"):
-        raise Exception("'input' parameter is mandatory")
+async def resolve_mutation_update_recipe(parent, args, ctx, info):
+    recipe_id = args["input"]["id"]
+    name = args["input"].get("name")
+    cooking_time = args["input"].get("cookingTime")
+
+    if not (name and cooking_time):
+        raise Exception(
+            "You should provide at least one value for either name or "
+            "cookingTime."
+        )
 
     for index, recipe in enumerate(RECIPES):
-        if recipe["id"] == args["input"].get("id"):
-            if "name" in args["input"]:
-                RECIPES[index]["name"] = args["input"]["name"]
-
-            if "cookingTime" in args["input"]:
-                RECIPES[index]["cookingTime"] = args["input"]["cookingTime"]
-
+        if recipe["id"] == recipe_id:
+            if name:
+                RECIPES[index]["name"] = name
+            if cooking_time:
+                RECIPES[index]["cookingTime"] = cooking_time
             return RECIPES[index]
 
-    raise Exception("The recipe specified is not found.")
+    raise Exception(f"The recipe < {recipe_id} > does not exist.")
