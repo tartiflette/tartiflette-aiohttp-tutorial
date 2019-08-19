@@ -152,23 +152,23 @@
         },
         "pytz": {
             "hashes": [
-                "sha256:303879e36b721603cc54604edcac9d20401bdbe31e1e4fdee5b9f98d5d31dfda",
-                "sha256:d747dd3d23d77ef44c6a3526e274af6efeb0a6f1afd5a69ba4d5be4098c8e141"
+                "sha256:26c0b32e437e54a18161324a2fca3c4b9846b74a8dccddd843113109e1116b32",
+                "sha256:c894d57500a4cd2d5c71114aaab77dbab5eabd9022308ce5ac9bb93a60a6f0c7"
             ],
-            "version": "==2019.1"
+            "version": "==2019.2"
         },
         "tartiflette": {
             "hashes": [
-                "sha256:f3b148cc2d3a18617900e0bfba82fdbd85f03e3eda62b32d6db5b161a800ae4f"
+                "sha256:0597d4cb264e1ed0c24f6c1f65c4b29f8a6c2d30a38737168ef50ec4c5d38a88"
             ],
-            "version": "==0.12.0"
+            "version": "==0.12.4"
         },
         "tartiflette-aiohttp": {
             "hashes": [
-                "sha256:81f0366c5e4d5123becec9ffacb62283ac54bbec770ad8e8025fb85e26897991"
+                "sha256:535f44b194aac8c221e2c354adfec13c8c1378822ed094e9b35b773af6e91a21"
             ],
             "index": "pypi",
-            "version": "==0.8.2"
+            "version": "==0.8.4"
         },
         "yarl": {
             "hashes": [
