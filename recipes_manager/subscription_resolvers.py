@@ -6,23 +6,26 @@ from recipes_manager.data import RECIPES
 
 
 @Subscription("Subscription.launchAndWaitCookingTimer")
-async def on_cooking_time(
-    parent_result, args, ctx, info
+async def subscribe_subscription_launch_and_wait_cooking_timer(
+    parent, args, ctx, info
 ):
-    recipe = [r for r in RECIPES if r["id"] == int(args["id"])]
+    recipe = None
+    for recipe_item in RECIPES:
+        if recipe_item["id"] == args["id"]:
+            recipe = recipe_item
 
     if not recipe:
-        raise Exception(f"The recipe with the id '{args['id']}' doesn't exist.")
+        raise Exception(f"The recipe < {args['id']} > does not exist.")
 
-    for index in range(0, recipe[0]["cookingTime"]):
+    for i in range(recipe["cookingTime"]):
         yield {
-            "remainingTime": recipe[0]["cookingTime"] - index,
-            "status": "COOKING"
+            "launchAndWaitCookingTimer": {
+                "remainingTime": recipe["cookingTime"] - i,
+                "status": "COOKING",
+            }
         }
-
         await asyncio.sleep(1)
 
     yield {
-        "remainingTime": 0,
-        "status": "COOKED"
+        "launchAndWaitCookingTimer": {"remainingTime": 0, "status": "COOKED"}
     }
