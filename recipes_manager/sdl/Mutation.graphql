@@ -4,7 +4,7 @@ directive @rateLimiting(
   duration: Int! = 60
 ) on FIELD_DEFINITION
 
-directive @auth(role: String!) on FIELD_DEFINITION
+directive @auth(domain: String!) on FIELD_DEFINITION
 
 input RecipeInput {
   id: Int!
@@ -13,5 +13,5 @@ input RecipeInput {
 }
 
 type Mutation {
-  updateRecipe(input: RecipeInput!): Recipe! @auth(role: "admin") @rateLimiting(name: "update_recipe")
+  updateRecipe(input: RecipeInput!): Recipe! @auth(domain: "localhost") @rateLimiting(name: "update_recipe")
 }
