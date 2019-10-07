@@ -1,4 +1,4 @@
-FROM python:3.7.2
+FROM python:3.7.3
 
 RUN apt-get update && apt-get install -y cmake bison flex
 
@@ -11,8 +11,7 @@ WORKDIR /usr/src/app
 
 COPY Pipfile /usr/src/app/
 
-ARG parameters=install
-RUN pipenv "${parameters}"
+RUN pipenv install
 
 COPY . /usr/src/app/
 
