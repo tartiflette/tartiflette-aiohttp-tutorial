@@ -6,7 +6,7 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-tartiflette-aiohttp = "~=0.8"
+tartiflette-aiohttp = "~=1.1"
 
 [requires]
 python_version = "3.7"
